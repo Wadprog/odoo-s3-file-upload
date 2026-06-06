@@ -56,4 +56,29 @@ Addon path: `addons/odoo_s3_file_upload` (mounted at `/mnt/extra-addons` in the 
 | `S3_SECRET_ACCESS_KEY` | Yes (for storage) | Secret key for AWS S3 or Cloudflare R2 |
 | `S3_SESSION_TOKEN` | No | Temporary session token (STS) |
 
-Credentials are passed into the `web` service via `docker-compose.yaml` and are not stored in the Odoo database. Bucket and endpoint settings are added in a later slice.
+Credentials are passed into the `web` service via `docker-compose.yaml` and are not stored in the Odoo database. Bucket and endpoint settings are configured in Odoo **Settings → S3 File Upload**.
+
+## R2 / S3 CORS (required for browser uploads)
+
+Uploads go **directly from the browser to storage**. If CORS is not configured on the bucket, uploads fail with `Failed to fetch` in the Odoo logs.
+
+In **Cloudflare R2** → your bucket → **Settings** → **CORS policy**, add:
+
+```json
+[
+  {
+    "AllowedOrigins": [
+      "http://localhost:8069",
+      "https://your-odoo-domain.com"
+    ],
+    "AllowedMethods": ["GET", "PUT", "HEAD"],
+    "AllowedHeaders": ["*"],
+    "ExposeHeaders": ["ETag"],
+    "MaxAgeSeconds": 3600
+  }
+]
+```
+
+- Replace origins with your real Odoo URL(s).
+- `ExposeHeaders: ETag` is required so multipart uploads can complete.
+- After saving CORS, hard-refresh Odoo and retry the upload.
