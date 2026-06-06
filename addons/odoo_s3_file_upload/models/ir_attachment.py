@@ -140,6 +140,22 @@ class IrAttachment(models.Model):
             }
         )
 
+    def s3_is_s3_task_attachment(self):
+        self.ensure_one()
+        return self.res_model == "project.task" and bool(self.s3_key)
+
+    def s3_get_download_url(self):
+        """Return a presigned GET URL after standard attachment read access checks."""
+        self.ensure_one()
+        self.check_access("read")
+        if not self.s3_is_s3_task_attachment():
+            raise UserError(_("Attachment is not stored in S3."))
+        if self.s3_storage_status != S3_STATUS_UPLOADED:
+            raise UserError(_("File is not available for download yet."))
+
+        client = get_storage_client(self.env)
+        return client.presign_get(self.s3_key)
+
     def s3_mark_uploaded(self, etag=None):
         self.ensure_one()
         vals = {
