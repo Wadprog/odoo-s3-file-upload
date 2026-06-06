@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.FileViewer" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o-FileViewer-header')]//div[hasclass('o-FileViewer-download')]/a" position="replace">
+            <button type="button" class="text-reset d-flex align-items-baseline border-0 bg-transparent p-0" t-on-click.stop="onClickDownload">
+                <i class="fa fa-download fa-fw me-1" role="img"/>
+                <span>Download</span>
+            </button>
+        </xpath>
+        <xpath expr="//div[hasclass('o-FileViewer-toolbarButton') and hasclass('o-FileViewer-download')]/a" position="replace">
+            <button type="button" class="text-reset border-0 bg-transparent p-0" t-on-click.stop="onClickDownload">
+                <i class="fa fa-download fa-fw" role="img"/>
+            </button>
+        </xpath>
+    </t>
+</templates>
