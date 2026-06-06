@@ -111,9 +111,20 @@ patch(AttachmentUploadService.prototype, {
             if (error.name === "AbortError") {
                 this.notificationService.add(_t("Upload cancelled"), { type: "warning" });
             } else {
+                const isCorsOrNetwork =
+                    error.message === "Failed to fetch" ||
+                    error.name === "TypeError";
                 this.notificationService.add(
-                    _t("Upload failed for %(file)s. Please try again.", { file: file.name }),
-                    { type: "danger" }
+                    isCorsOrNetwork
+                        ? _t(
+                              "Upload failed for %(file)s: browser could not reach storage. Configure CORS on your S3/R2 bucket to allow PUT from this Odoo origin.",
+                              { file: file.name }
+                          )
+                        : _t("Upload failed for %(file)s: %(reason)s", {
+                              file: file.name,
+                              reason: error.message,
+                          }),
+                    { type: "danger", sticky: isCorsOrNetwork }
                 );
             }
             def.resolve();
