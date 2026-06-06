@@ -3,6 +3,20 @@
     "version": "19.0.1.0.0",
     "category": "Project",
     "summary": "S3-compatible direct uploads for project.task attachments",
+    "description": """
+        <p>
+            Direct browser uploads and downloads for <strong>project.task</strong> attachments
+            on S3-compatible storage (AWS S3 or Cloudflare R2). Odoo handles permissions and
+            metadata; file bytes travel between the browser and object storage only.
+        </p>
+        <p>
+            <a href="https://wadprog.github.io/odoo-s3-file-upload/" target="_blank" rel="noopener">
+                Documentation and more info
+            </a>
+        </p>
+    """,
+    "author": "C3 Edition Publishing",
+    "website": "https://wadprog.github.io/odoo-s3-file-upload/",
     "depends": ["project", "mail", "web"],
     "data": [
         "views/res_config_settings_views.xml",
