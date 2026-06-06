@@ -50,10 +50,10 @@ class IrAttachment(models.Model):
         return {ext.strip().lower() for ext in raw.split(",") if ext.strip()}
 
     def _check_blocklist_filename(self, filename):
-        _, ext = os.path.splitext(filename or "")
+        _basename, ext = os.path.splitext(filename or "")
         if ext.lower() in self._get_blocklist():
             raise UserError(
-                _("File type %(ext)s is not allowed for task attachments.", ext=ext)
+                _("File type %s is not allowed for task attachments.") % ext
             )
 
     def _guard_project_task_create(self, vals):
