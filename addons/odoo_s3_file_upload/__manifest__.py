@@ -36,6 +36,18 @@
                 "mail/static/src/core/common/attachment_upload_service.js",
                 "odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js",
             ),
+            "odoo_s3_file_upload/static/src/js/s3_download.js",
+            (
+                "after",
+                "mail/static/src/core/common/attachment_list.js",
+                "odoo_s3_file_upload/static/src/js/attachment_list_patch.js",
+            ),
+            (
+                "after",
+                "web/static/src/core/file_viewer/file_viewer.js",
+                "odoo_s3_file_upload/static/src/js/file_viewer_patch.js",
+            ),
+            "odoo_s3_file_upload/static/src/xml/file_viewer_patch.xml",
         ],
     },
     "installable": True,
