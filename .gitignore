@@ -11,6 +11,9 @@ __pycache__/
 # OS
 .DS_Store
 
+# Cursor (local IDE config)
+.cursor/
+
 # Local DB dumps
 Dump*.sql
 *.sql
