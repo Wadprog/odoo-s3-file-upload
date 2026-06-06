@@ -1,0 +1,7 @@
+.git
+.gitignore
+docs
+*.md
+odoo_pg_pass
+postgresql_password
+config/odoo.conf
