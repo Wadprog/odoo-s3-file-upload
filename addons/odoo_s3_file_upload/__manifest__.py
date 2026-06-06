@@ -4,6 +4,9 @@
     "category": "Project",
     "summary": "S3-compatible direct uploads for project.task attachments",
     "depends": ["project", "mail"],
+    "data": [
+        "views/res_config_settings_views.xml",
+    ],
     "installable": True,
     "application": False,
     "license": "LGPL-3",
