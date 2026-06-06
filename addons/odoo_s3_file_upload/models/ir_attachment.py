@@ -152,8 +152,16 @@ class IrAttachment(models.Model):
 
     def s3_mark_failed(self):
         self.ensure_one()
+        if self.s3_upload_id and self.s3_key:
+            try:
+                get_storage_client(self.env).abort_multipart(self.s3_key, self.s3_upload_id)
+            except UserError:
+                pass
         self.with_context(s3_upload_allowed=True).write(
-            {"s3_storage_status": S3_STATUS_FAILED}
+            {
+                "s3_storage_status": S3_STATUS_FAILED,
+                "s3_upload_id": False,
+            }
         )
 
     def s3_cancel(self):
@@ -162,6 +170,81 @@ class IrAttachment(models.Model):
             client = get_storage_client(self.env)
             client.abort_multipart(self.s3_key, self.s3_upload_id)
         self.with_context(s3_upload_allowed=True).unlink()
+
+    def _s3_check_upload_session(self, upload_id):
+        self.ensure_one()
+        if not upload_id or self.s3_upload_id != upload_id:
+            raise UserError(_("Invalid or expired upload session."))
+
+    def _s3_check_pending_upload(self):
+        self.ensure_one()
+        if self.s3_storage_status not in (S3_STATUS_PENDING, S3_STATUS_FAILED):
+            raise UserError(_("Attachment is not in a pending upload state."))
+
+    def s3_init_multipart(self):
+        self.ensure_one()
+        self._s3_check_pending_upload()
+        if self.s3_storage_status == S3_STATUS_FAILED:
+            self.s3_resolve_retry_key()
+
+        client = get_storage_client(self.env)
+        upload_id = client.init_multipart(self.s3_key, self.mimetype)
+        self.with_context(s3_upload_allowed=True).write({"s3_upload_id": upload_id})
+        return upload_id
+
+    def s3_presign_part(self, upload_id, part_number):
+        self.ensure_one()
+        self._s3_check_pending_upload()
+        self._s3_check_upload_session(upload_id)
+        if part_number < 1:
+            raise UserError(_("Part number must be at least 1."))
+
+        client = get_storage_client(self.env)
+        return client.presign_part(self.s3_key, upload_id, part_number)
+
+    def s3_complete_multipart(self, upload_id, parts):
+        self.ensure_one()
+        self._s3_check_pending_upload()
+        self._s3_check_upload_session(upload_id)
+        if not parts:
+            raise UserError(_("At least one uploaded part is required."))
+
+        formatted_parts = sorted(
+            [
+                {
+                    "ETag": part["etag"],
+                    "PartNumber": int(part["part_number"]),
+                }
+                for part in parts
+            ],
+            key=lambda item: item["PartNumber"],
+        )
+
+        client = get_storage_client(self.env)
+        result = client.complete_multipart(self.s3_key, upload_id, formatted_parts)
+        etag = result.get("ETag")
+        self.with_context(s3_upload_allowed=True).write(
+            {
+                "s3_etag": etag,
+                "s3_upload_id": False,
+            }
+        )
+        return result
+
+    def s3_finalize(self):
+        self.ensure_one()
+        if self.s3_storage_status != S3_STATUS_PENDING:
+            raise UserError(_("Only pending attachments can be finalized."))
+        self.s3_mark_uploaded(etag=self.s3_etag)
+        return True
+
+    def s3_abort_multipart(self):
+        self.ensure_one()
+        if self.s3_upload_id and self.s3_key:
+            client = get_storage_client(self.env)
+            client.abort_multipart(self.s3_key, self.s3_upload_id)
+        self.with_context(s3_upload_allowed=True).write({"s3_upload_id": False})
+        return True
 
     def s3_resolve_retry_key(self):
         """Reuse key when no object exists; rotate when a partial object exists."""
