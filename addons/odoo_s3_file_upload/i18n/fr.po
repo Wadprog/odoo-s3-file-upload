@@ -1,0 +1,518 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* odoo_s3_file_upload
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-06 15:08+0000\n"
+"PO-Revision-Date: 2026-06-06 15:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields.selection,name:odoo_s3_file_upload.selection__ir_attachment__storage_provider__s3
+msgid "AWS S3"
+msgstr "AWS S3"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid ""
+"AWS region (e.g. us-east-1). Used for signing even with custom endpoints."
+msgstr ""
+"Région AWS (p. ex. us-east-1). Utilisée pour la signature même avec des "
+"points de terminaison personnalisés."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "At least one uploaded part is required."
+msgstr "Au moins une partie téléversée est requise."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model,name:odoo_s3_file_upload.model_ir_attachment
+msgid "Attachment"
+msgstr "Pièce jointe"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Attachment has no S3 key to retry."
+msgstr "La pièce jointe n'a pas de clé S3 pour réessayer."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Attachment is not in a pending upload state."
+msgstr "La pièce jointe n'est pas en attente de téléversement."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/controllers/s3_upload.py:0
+msgid "Attachment is not linked to a project task."
+msgstr "La pièce jointe n'est pas liée à une tâche de projet."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Attachment is not stored in S3."
+msgstr "La pièce jointe n'est pas stockée dans S3."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/controllers/s3_upload.py:0
+msgid "Attachment not found."
+msgstr "Pièce jointe introuvable."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid ""
+"Attachments on project tasks must be created through the S3 upload flow."
+msgstr ""
+"Les pièces jointes des tâches de projet doivent être créées via le flux de "
+"téléversement S3."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_blocklist_extensions
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Blocked Extensions"
+msgstr "Extensions bloquées"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_bucket_name
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Bucket Name"
+msgstr "Nom du compartiment"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields.selection,name:odoo_s3_file_upload.selection__ir_attachment__s3_storage_status__cancelled
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields.selection,name:odoo_s3_file_upload.selection__ir_attachment__storage_provider__r2
+msgid "Cloudflare R2"
+msgstr "Cloudflare R2"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Comma-separated extensions blocked on upload (e.g. .exe,.bat)."
+msgstr ""
+"Extensions bloquées au téléversement, séparées par des virgules (p. ex. "
+".exe,.bat)."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,help:odoo_s3_file_upload.field_res_config_settings__s3_blocklist_extensions
+msgid "Comma-separated list of blocked file extensions (e.g. .exe,.bat)."
+msgstr ""
+"Liste d'extensions de fichiers bloquées, séparées par des virgules (p. ex. "
+".exe,.bat)."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model,name:odoo_s3_file_upload.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/res_config_settings.py:0
+msgid "Connection successful"
+msgstr "Connexion réussie"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Credentials"
+msgstr "Identifiants"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Credentials are read from environment variables only."
+msgstr ""
+"Les identifiants sont lus uniquement à partir des variables d'environnement."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__display_name
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_http__display_name
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/xml/file_viewer_patch.xml:0
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/s3_download.js:0
+msgid "Download failed for %(file)s: %(reason)s"
+msgstr "Échec du téléchargement de %(file)s : %(reason)s"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/s3_download.js:0
+msgid ""
+"Download failed for %(file)s: browser could not reach storage. Configure "
+"CORS on your S3/R2 bucket to allow GET from this Odoo origin."
+msgstr ""
+"Échec du téléchargement de %(file)s : le navigateur n'a pas pu atteindre le "
+"stockage. Configurez CORS sur votre compartiment S3/R2 pour autoriser GET "
+"depuis cette origine Odoo."
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/s3_download.js:0
+msgid "Downloaded %(file)s"
+msgstr "%(file)s téléchargé"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/s3_download.js:0
+msgid "Downloading %(file)s..."
+msgstr "Téléchargement de %(file)s..."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,help:odoo_s3_file_upload.field_res_config_settings__s3_use_path_style
+msgid "Enable for some S3-compatible providers (e.g. MinIO, R2)."
+msgstr ""
+"Activer pour certains fournisseurs compatibles S3 (p. ex. MinIO, R2)."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Enable if your provider requires path-style S3 URLs."
+msgstr ""
+"Activer si votre fournisseur exige des URL S3 de style chemin."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_endpoint_url
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Endpoint URL"
+msgstr "URL du point de terminaison"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields.selection,name:odoo_s3_file_upload.selection__ir_attachment__s3_storage_status__failed
+msgid "Failed"
+msgstr "Échoué"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "File is not available for download yet."
+msgstr "Le fichier n'est pas encore disponible au téléchargement."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid ""
+"File size (%(size)s bytes) exceeds the maximum allowed for task attachments "
+"(%(max)s bytes)."
+msgstr ""
+"La taille du fichier (%(size)s octets) dépasse le maximum autorisé pour les "
+"pièces jointes de tâche (%(max)s octets)."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "File type %s is not allowed for task attachments."
+msgstr "Le type de fichier %s n'est pas autorisé pour les pièces jointes de tâche."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model,name:odoo_s3_file_upload.model_ir_http
+msgid "HTTP Routing"
+msgstr "Routage HTTP"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__id
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_http__id
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__id
+msgid "ID"
+msgstr "ID"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Invalid or expired upload session."
+msgstr "Session de téléversement invalide ou expirée."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_key_prefix
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Key Prefix"
+msgstr "Préfixe de clé"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,help:odoo_s3_file_upload.field_res_config_settings__s3_endpoint_url
+msgid ""
+"Leave empty for AWS S3. Set for Cloudflare R2 or other S3-compatible "
+"storage."
+msgstr ""
+"Laisser vide pour AWS S3. Renseigner pour Cloudflare R2 ou autre stockage "
+"compatible S3."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid ""
+"Leave empty for AWS. Set for Cloudflare R2 or other S3-compatible storage."
+msgstr ""
+"Laisser vide pour AWS. Renseigner pour Cloudflare R2 ou autre stockage "
+"compatible S3."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Lifetime of presigned upload/download URLs in seconds."
+msgstr ""
+"Durée de vie des URL de téléversement/téléchargement présignées, en secondes."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Linked task no longer exists."
+msgstr "La tâche liée n'existe plus."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid ""
+"Local file uploads are not allowed on project tasks. Use the S3 upload flow "
+"instead."
+msgstr ""
+"Les téléversements locaux ne sont pas autorisés sur les tâches de projet. "
+"Utilisez plutôt le flux de téléversement S3."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid ""
+"Maximum file size for project.task S3 uploads in bytes. 0 means no limit "
+"(bypasses Odoo's default 128 MB client cap)."
+msgstr ""
+"Taille maximale des fichiers pour les téléversements S3 des tâches, en "
+"octets. 0 signifie sans limite (contourne la limite client par défaut de "
+"128 Mo d'Odoo)."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,help:odoo_s3_file_upload.field_res_config_settings__s3_task_max_file_size
+msgid ""
+"Maximum file size for project.task S3 uploads in bytes. 0 means no limit."
+msgstr ""
+"Taille maximale des fichiers pour les téléversements S3 des tâches, en "
+"octets. 0 signifie sans limite."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Name of the S3 or R2 bucket for task attachments."
+msgstr "Nom du compartiment S3 ou R2 pour les pièces jointes de tâche."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Only pending attachments can be finalized."
+msgstr "Seules les pièces jointes en attente peuvent être finalisées."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Optional prefix for all object keys."
+msgstr "Préfixe optionnel pour toutes les clés d'objet."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,help:odoo_s3_file_upload.field_res_config_settings__s3_key_prefix
+msgid "Optional prefix prepended to every object key."
+msgstr "Préfixe optionnel ajouté devant chaque clé d'objet."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Part number must be at least 1."
+msgstr "Le numéro de partie doit être au moins 1."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_use_path_style
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Path-Style Addressing"
+msgstr "Adressage de style chemin"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields.selection,name:odoo_s3_file_upload.selection__ir_attachment__s3_storage_status__pending
+msgid "Pending"
+msgstr "En attente"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Presigned URL TTL"
+msgstr "Durée de vie des URL présignées"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_presigned_ttl_seconds
+msgid "Presigned URL TTL (seconds)"
+msgstr "Durée de vie des URL présignées (secondes)"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_region
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Region"
+msgstr "Région"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__s3_bucket
+msgid "S3 Bucket"
+msgstr "Compartiment S3"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__s3_etag
+msgid "S3 ETag"
+msgstr "ETag S3"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__s3_file_size
+msgid "S3 File Size"
+msgstr "Taille du fichier S3"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "S3 File Upload"
+msgstr "Téléversement de fichiers S3"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__s3_upload_id
+msgid "S3 Multipart Upload ID"
+msgstr "ID de téléversement multipart S3"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__s3_key
+msgid "S3 Object Key"
+msgstr "Clé d'objet S3"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.view_attachment_form_s3
+msgid "S3 Storage"
+msgstr "Stockage S3"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__s3_storage_status
+msgid "S3 Storage Status"
+msgstr "État du stockage S3"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "S3-Compatible Storage"
+msgstr "Stockage compatible S3"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid ""
+"Set S3_ACCESS_KEY_ID and S3_SECRET_ACCESS_KEY as container environment "
+"variables. They are never stored in the database."
+msgstr ""
+"Définissez S3_ACCESS_KEY_ID et S3_SECRET_ACCESS_KEY comme variables "
+"d'environnement du conteneur. Elles ne sont jamais stockées dans la base de "
+"données."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_ir_attachment__storage_provider
+msgid "Storage Provider"
+msgstr "Fournisseur de stockage"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/res_config_settings.py:0
+msgid "Storage bucket is reachable."
+msgstr "Le compartiment de stockage est accessible."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/models/ir_attachment.py:0
+msgid "Task %s does not exist."
+msgstr "La tâche %s n'existe pas."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Task Max File Size"
+msgstr "Taille max. des fichiers de tâche"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_task_max_file_size
+msgid "Task Max File Size (bytes)"
+msgstr "Taille max. des fichiers de tâche (octets)"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/controllers/s3_upload.py:0
+msgid "Task not found."
+msgstr "Tâche introuvable."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Test Connection"
+msgstr "Tester la connexion"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/file_uploader_patch.js:0
+msgid ""
+"The selected file (%(size)sB) is larger than the maximum allowed file size "
+"(%(maxSize)sB)."
+msgstr ""
+"Le fichier sélectionné (%(size)s o) dépasse la taille maximale autorisée "
+"(%(maxSize)s o)."
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js:0
+msgid "Upload cancelled"
+msgstr "Téléversement annulé"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js:0
+msgid "Upload failed for %(file)s: %(reason)s"
+msgstr "Échec du téléversement de %(file)s : %(reason)s"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js:0
+msgid ""
+"Upload failed for %(file)s: browser could not reach storage. Configure CORS "
+"on your S3/R2 bucket to allow PUT from this Odoo origin."
+msgstr ""
+"Échec du téléversement de %(file)s : le navigateur n'a pas pu atteindre le "
+"stockage. Configurez CORS sur votre compartiment S3/R2 pour autoriser PUT "
+"depuis cette origine Odoo."
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields.selection,name:odoo_s3_file_upload.selection__ir_attachment__s3_storage_status__uploaded
+msgid "Uploaded"
+msgstr "Téléversé"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js:0
+msgid "Uploaded %(file)s"
+msgstr "%(file)s téléversé"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js:0
+msgid "Uploading %(file)s..."
+msgstr "Téléversement de %(file)s..."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "https://<account_id>.r2.cloudflarestorage.com"
+msgstr "https://<account_id>.r2.cloudflarestorage.com"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "my-bucket"
+msgstr "mon-compartiment"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "production"
+msgstr "production"
