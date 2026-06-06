@@ -6,6 +6,7 @@
     "depends": ["project", "mail"],
     "data": [
         "views/res_config_settings_views.xml",
+        "views/ir_attachment_views.xml",
     ],
     "installable": True,
     "application": False,
