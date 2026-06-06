@@ -12,6 +12,22 @@
         "web.assets_backend": [
             (
                 "after",
+                "web/static/src/views/fields/file_handler.js",
+                "odoo_s3_file_upload/static/src/js/file_uploader_patch.js",
+            ),
+            (
+                "after",
+                "mail/static/src/chatter/web/chatter_patch.js",
+                "odoo_s3_file_upload/static/src/js/chatter_patch.js",
+            ),
+            "odoo_s3_file_upload/static/src/xml/chatter_patch.xml",
+            (
+                "after",
+                "mail/static/src/core/common/attachment_uploader_hook.js",
+                "odoo_s3_file_upload/static/src/js/attachment_uploader_hook_patch.js",
+            ),
+            (
+                "after",
                 "mail/static/src/core/common/attachment_upload_service.js",
                 "odoo_s3_file_upload/static/src/js/s3_multipart_upload.js",
             ),

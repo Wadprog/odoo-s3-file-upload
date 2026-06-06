@@ -83,6 +83,24 @@ class TestIrAttachmentS3(TransactionCase):
                 self.task.id, "virus.exe", "application/octet-stream", 10
             )
 
+    def test_create_pending_allows_large_file_when_no_limit(self, mock_get_client):
+        self._mock_client(mock_get_client)
+        large_size = 308 * 1024 * 1024
+        attachment = self.env["ir.attachment"].s3_create_pending(
+            self.task.id, "large.zip", "application/zip", large_size
+        )
+        self.assertEqual(attachment.s3_file_size, large_size)
+
+    def test_create_pending_rejects_file_over_configured_max(self, mock_get_client):
+        self._mock_client(mock_get_client)
+        self.env["ir.config_parameter"].sudo().set_param(
+            "odoo_s3_file_upload.task_max_file_size", "1000"
+        )
+        with self.assertRaises(UserError):
+            self.env["ir.attachment"].s3_create_pending(
+                self.task.id, "too-big.pdf", "application/pdf", 2000
+            )
+
     def test_create_pending_sets_empty_binary_and_key(self, mock_get_client):
         self._mock_client(mock_get_client)
         attachment = self.env["ir.attachment"].s3_create_pending(

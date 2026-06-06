@@ -114,6 +114,24 @@ class IrAttachment(models.Model):
         return f"projects/{task.project_id.id}/tasks/{task.id}/{unique}_{safe_name}"
 
     @api.model
+    def _get_task_max_file_size(self):
+        return int(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("odoo_s3_file_upload.task_max_file_size", "0")
+        )
+
+    def _check_task_max_file_size(self, file_size):
+        max_size = self._get_task_max_file_size()
+        if max_size and file_size > max_size:
+            raise UserError(
+                _(
+                    "File size (%(size)s bytes) exceeds the maximum allowed "
+                    "for task attachments (%(max)s bytes)."
+                )
+                % {"size": file_size, "max": max_size}
+            )
+
     def s3_create_pending(self, task_id, filename, mimetype, file_size):
         """Create a draft task attachment with a reserved S3 object key."""
         task = self.env["project.task"].browse(task_id).exists()
@@ -121,6 +139,7 @@ class IrAttachment(models.Model):
             raise UserError(_("Task %s does not exist.", task_id))
 
         self._check_blocklist_filename(filename)
+        self._check_task_max_file_size(file_size)
         client = get_storage_client(self.env)
         s3_key = self._generate_s3_key(task, filename)
 
