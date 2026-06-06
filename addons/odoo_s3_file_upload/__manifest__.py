@@ -23,6 +23,11 @@
             "odoo_s3_file_upload/static/src/xml/chatter_patch.xml",
             (
                 "after",
+                "mail/static/src/core/common/attachment_uploader_hook.js",
+                "odoo_s3_file_upload/static/src/js/attachment_uploader_hook_patch.js",
+            ),
+            (
+                "after",
                 "mail/static/src/core/common/attachment_upload_service.js",
                 "odoo_s3_file_upload/static/src/js/s3_multipart_upload.js",
             ),

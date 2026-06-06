@@ -6,8 +6,11 @@ import { humanNumber } from "@web/core/utils/numbers";
 import { session } from "@web/session";
 import { FileUploader } from "@web/views/fields/file_handler";
 
-Object.assign(FileUploader.props, {
-    directFileUpload: { type: Boolean, optional: true },
+patch(FileUploader, {
+    props: {
+        ...FileUploader.props,
+        directFileUpload: { type: Boolean, optional: true },
+    },
 });
 
 function checkTaskFileSize(fileSize, notificationService) {
