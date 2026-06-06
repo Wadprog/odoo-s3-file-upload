@@ -41,6 +41,12 @@ class ResConfigSettings(models.TransientModel):
         default=DEFAULT_BLOCKLIST,
         help="Comma-separated list of blocked file extensions (e.g. .exe,.bat).",
     )
+    s3_task_max_file_size = fields.Integer(
+        string="Task Max File Size (bytes)",
+        config_parameter="odoo_s3_file_upload.task_max_file_size",
+        default=0,
+        help="Maximum file size for project.task S3 uploads in bytes. 0 means no limit.",
+    )
 
     def action_test_s3_connection(self):
         self.ensure_one()

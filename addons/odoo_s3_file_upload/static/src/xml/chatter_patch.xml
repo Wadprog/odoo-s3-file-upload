@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.Chatter" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o-mail-Chatter-topbar')]//FileUploader" position="attributes">
+            <attribute name="checkSize">state.thread.model !== 'project.task'</attribute>
+            <attribute name="directFileUpload">state.thread.model === 'project.task'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o-mail-AttachmentBox')]//FileUploader" position="attributes">
+            <attribute name="checkSize">state.thread.model !== 'project.task'</attribute>
+            <attribute name="directFileUpload">state.thread.model === 'project.task'</attribute>
+        </xpath>
+    </t>
+</templates>
