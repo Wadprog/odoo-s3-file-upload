@@ -1,4 +1,5 @@
 # Secrets — never commit
+.env
 odoo_pg_pass
 postgresql_password
 config/odoo.conf
