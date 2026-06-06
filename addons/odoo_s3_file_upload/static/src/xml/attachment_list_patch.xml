@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.AttachmentList" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o-mail-AttachmentContainer')]" position="inside">
+            <span
+                t-if="s3StatusLabel(attachment)"
+                class="position-absolute top-0 start-0 m-1 badge z-1"
+                t-att-class="s3StatusClass(attachment)"
+                t-esc="s3StatusLabel(attachment)"
+            />
+        </xpath>
+    </t>
+</templates>

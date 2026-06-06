@@ -153,6 +153,23 @@
 
     <div class="rule"></div>
 
+    <section class="card" style="margin-bottom: 16px;">
+      <h2>Production checklist</h2>
+      <ul>
+        <li>Set <code>S3_ACCESS_KEY_ID</code> and <code>S3_SECRET_ACCESS_KEY</code> on the Odoo container</li>
+        <li>Configure bucket, endpoint, and path-style under <strong>Settings → S3 File Upload</strong></li>
+        <li>Add CORS on the bucket for each Odoo origin (<code>PUT</code>, <code>GET</code>, <code>HEAD</code>; expose <code>ETag</code>)</li>
+        <li>Use <strong>Test Connection</strong> after deploy</li>
+        <li>Upgrade the module and hard-refresh browsers after releases</li>
+        <li>Adjust presigned TTL for very large files on slow networks (default 1 hour)</li>
+        <li>Daily cron removes stale <code>pending</code> / <code>failed</code> uploads (default: older than 24 h)</li>
+      </ul>
+      <p class="note" style="margin-top: 12px;">
+        Full ops guide:
+        <a href="https://github.com/Wadprog/odoo-s3-file-upload/blob/main/README.md#production-deployment-checklist">README production section</a>
+      </p>
+    </section>
+
     <section class="card">
       <h2>Project links</h2>
       <p>

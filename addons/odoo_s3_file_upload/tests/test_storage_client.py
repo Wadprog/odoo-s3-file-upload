@@ -12,6 +12,7 @@ class TestS3StorageClient(TransactionCase):
         super().setUp()
         self.icp = self.env["ir.config_parameter"].sudo()
         self.icp.set_param("odoo_s3_file_upload.bucket_name", "test-bucket")
+        self.icp.set_param("odoo_s3_file_upload.key_prefix", "")
         self.icp.set_param("odoo_s3_file_upload.region", "us-east-1")
         self.icp.set_param("odoo_s3_file_upload.presigned_ttl_seconds", "3600")
         self.env_patch = patch.dict(

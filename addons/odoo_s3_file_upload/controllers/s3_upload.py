@@ -39,7 +39,7 @@ class S3UploadController(http.Controller):
     def init_upload(self, attachment_id):
         attachment = self._get_task_attachment(attachment_id)
         upload_id = attachment.s3_init_multipart()
-        return {"upload_id": upload_id}
+        return {"upload_id": upload_id, "part_size": DEFAULT_PART_SIZE}
 
     @http.route("/odoo_s3_file_upload/presign_part", type="jsonrpc", auth="user")
     def presign_part(self, attachment_id, upload_id, part_number):

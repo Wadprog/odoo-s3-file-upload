@@ -185,6 +185,32 @@ class TestIrAttachmentS3(TransactionCase):
         url = attachment.s3_get_download_url()
         self.assertTrue(url.startswith("https://signed.example/"))
 
+    def test_finalize_allows_failed_status_after_multipart(self, mock_get_client):
+        self._mock_client(mock_get_client)
+        attachment = self.env["ir.attachment"].s3_create_pending(
+            self.task.id, "draft.pdf", "application/pdf", 1200
+        )
+        attachment.s3_mark_failed()
+        attachment.with_context(s3_upload_allowed=True).write(
+            {"s3_etag": '"etag-1"', "s3_upload_id": False}
+        )
+        attachment.s3_finalize()
+        self.assertEqual(attachment.s3_storage_status, S3_STATUS_UPLOADED)
+
+    def test_cleanup_stale_uploads_removes_old_pending(self, mock_get_client):
+        client = self._mock_client(mock_get_client)
+        attachment = self.env["ir.attachment"].s3_create_pending(
+            self.task.id, "stale.pdf", "application/pdf", 1200
+        )
+        attachment.with_context(s3_upload_allowed=True).write(
+            {"s3_upload_id": "upload-abc"}
+        )
+        s3_key = attachment.s3_key
+        attachment.write({"write_date": "2020-01-01 00:00:00"})
+        self.env["ir.attachment"].s3_cleanup_stale_uploads()
+        self.assertFalse(attachment.exists())
+        self.assertEqual(client.aborted, [(s3_key, "upload-abc")])
+
     def test_download_denied_for_user_without_task_access(self, mock_get_client):
         self._mock_client(mock_get_client)
         attachment = self.env["ir.attachment"].s3_create_pending(

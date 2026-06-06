@@ -83,3 +83,43 @@ In **Cloudflare R2** → your bucket → **Settings** → **CORS policy**, add:
 - Replace origins with your real Odoo URL(s).
 - `ExposeHeaders: ETag` is required so multipart uploads can complete.
 - After saving CORS, hard-refresh Odoo and retry the upload.
+
+## Production deployment checklist
+
+### Environment
+
+| Item | Notes |
+|------|--------|
+| `S3_ACCESS_KEY_ID` / `S3_SECRET_ACCESS_KEY` | Set on the Odoo container (or host process). Never commit or store in the database. |
+| Bucket settings | **Settings → S3 File Upload**: bucket name, region, endpoint (R2), key prefix, presigned TTL, path-style if required. |
+| **Test Connection** | Run from Settings after deploy to confirm credentials and bucket access. |
+
+### CORS
+
+Configure the bucket for every Odoo origin (production, staging, localhost). Required methods: `GET`, `PUT`, `HEAD`. Expose `ETag` for multipart completion. See the JSON example in [R2 / S3 CORS](#r2--s3-cors-required-for-browser-uploads) above.
+
+### Presigned URL TTL
+
+Default is 3600 seconds (1 hour). Large files on slow links may need a higher TTL under **Presigned URL TTL**. The upload client re-requests part URLs on 403/400, but keeping TTL comfortably above expected upload duration reduces retries.
+
+### Stale uploads
+
+A daily cron aborts and deletes `pending` or `failed` task attachments older than **Stale Upload Cleanup** hours (default 24). Adjust under **Settings → S3 File Upload** if editors often leave drafts open overnight.
+
+### Operations
+
+1. **Upgrade module** after each deploy (`-u odoo_s3_file_upload`) so cron, views, and assets load.
+2. **Hard-refresh browsers** after JS changes (or bump assets in production).
+3. **Monitor logs** for `S3 upload failed for attachment` and storage `UserError` messages.
+4. **R2 path-style**: enable in Settings if your provider requires it (Cloudflare R2 typically does).
+5. **Backups**: attachment metadata lives in PostgreSQL; file bytes are in object storage — back up both.
+
+### Troubleshooting
+
+| Symptom | Likely cause |
+|---------|----------------|
+| `Failed to fetch` on upload | Missing or wrong CORS on the bucket |
+| Download returns placeholder image | Image route not upgraded; ensure module is latest |
+| Upload stuck at 0% | Network block or presign failure; check Odoo server logs |
+| `Storage connection failed` on Test Connection | Wrong bucket, endpoint, credentials, or path-style setting |
+| Orphan `pending` rows | Wait for cron or lower stale-upload hours temporarily |

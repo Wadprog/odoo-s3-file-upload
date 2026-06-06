@@ -47,6 +47,12 @@ class ResConfigSettings(models.TransientModel):
         default=0,
         help="Maximum file size for project.task S3 uploads in bytes. 0 means no limit.",
     )
+    s3_stale_upload_hours = fields.Integer(
+        string="Stale Upload Cleanup (hours)",
+        config_parameter="odoo_s3_file_upload.stale_upload_hours",
+        default=24,
+        help="Pending or failed task uploads older than this are aborted and removed by a daily cron.",
+    )
 
     def action_test_s3_connection(self):
         self.ensure_one()

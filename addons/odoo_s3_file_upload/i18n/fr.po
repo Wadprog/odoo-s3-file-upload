@@ -499,8 +499,121 @@ msgstr "%(file)s téléversé"
 #. module: odoo_s3_file_upload
 #. odoo-javascript
 #: code:addons/odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js:0
-msgid "Uploading %(file)s..."
-msgstr "Téléversement de %(file)s..."
+msgid "Uploading %(file)s… %(pct)s%%"
+msgstr "Téléversement de %(file)s… %(pct)s %%"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_upload_service_patch.js:0
+msgid "Uploading %(file)s… 0%%"
+msgstr "Téléversement de %(file)s… 0 %%"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_list_patch.js:0
+msgid "Pending"
+msgstr "En attente"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_list_patch.js:0
+msgid "Failed"
+msgstr "Échec"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_list_patch.js:0
+msgid "Retry upload"
+msgstr "Réessayer le téléversement"
+
+#. module: odoo_s3_file_upload
+#. odoo-javascript
+#: code:addons/odoo_s3_file_upload/static/src/js/attachment_list_patch.js:0
+msgid "Could not find the linked task."
+msgstr "Impossible de trouver la tâche liée."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "S3 bucket name is not configured. Set it in Settings."
+msgstr "Le nom du compartiment S3 n'est pas configuré. Définissez-le dans les paramètres."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid ""
+"S3 credentials are missing. Set S3_ACCESS_KEY_ID and "
+"S3_SECRET_ACCESS_KEY in the container environment."
+msgstr ""
+"Identifiants S3 manquants. Définissez S3_ACCESS_KEY_ID et "
+"S3_SECRET_ACCESS_KEY dans l'environnement du conteneur."
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "Storage connection failed: %s"
+msgstr "Échec de la connexion au stockage : %s"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "Failed to start multipart upload: %s"
+msgstr "Échec du démarrage du téléversement multipart : %s"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "Failed to presign upload part: %s"
+msgstr "Échec de la signature de la partie de téléversement : %s"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "Failed to complete multipart upload: %s"
+msgstr "Échec de la finalisation du téléversement multipart : %s"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "Failed to abort multipart upload: %s"
+msgstr "Échec de l'annulation du téléversement multipart : %s"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "Failed to check object: %s"
+msgstr "Échec de la vérification de l'objet : %s"
+
+#. module: odoo_s3_file_upload
+#. odoo-python
+#: code:addons/odoo_s3_file_upload/services/storage_client.py:0
+msgid "Failed to presign download URL: %s"
+msgstr "Échec de la signature de l'URL de téléchargement : %s"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,field_description:odoo_s3_file_upload.field_res_config_settings__s3_stale_upload_hours
+msgid "Stale Upload Cleanup (hours)"
+msgstr "Nettoyage des téléversements obsolètes (heures)"
+
+#. module: odoo_s3_file_upload
+#: model:ir.model.fields,help:odoo_s3_file_upload.field_res_config_settings__s3_stale_upload_hours
+msgid "Pending or failed task uploads older than this are aborted and removed by a daily cron."
+msgstr "Les téléversements de tâches en attente ou en échec plus anciens sont annulés et supprimés par une tâche planifiée quotidienne."
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Stale Upload Cleanup"
+msgstr "Nettoyage des téléversements obsolètes"
+
+#. module: odoo_s3_file_upload
+#: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
+msgid "Pending or failed task uploads older than this many hours are aborted and removed by a daily cron job."
+msgstr "Les téléversements de tâches en attente ou en échec plus anciens que ce nombre d'heures sont annulés et supprimés par une tâche planifiée quotidienne."
+
+#. module: odoo_s3_file_upload
+#: model:ir.actions.server,name:odoo_s3_file_upload.ir_cron_s3_cleanup_stale_uploads
+msgid "S3: clean up stale task uploads"
+msgstr "S3 : nettoyer les téléversements de tâches obsolètes"
 
 #. module: odoo_s3_file_upload
 #: model_terms:ir.ui.view,arch_db:odoo_s3_file_upload.res_config_settings_view_form
