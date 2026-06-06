@@ -32,6 +32,9 @@
                         <setting string="Task Max File Size" help="Maximum file size for project.task S3 uploads in bytes. 0 means no limit (bypasses Odoo's default 128 MB client cap).">
                             <field name="s3_task_max_file_size"/>
                         </setting>
+                        <setting string="Stale Upload Cleanup" help="Pending or failed task uploads older than this many hours are aborted and removed by a daily cron job.">
+                            <field name="s3_stale_upload_hours"/>
+                        </setting>
                         <setting string="Credentials" help="Set S3_ACCESS_KEY_ID and S3_SECRET_ACCESS_KEY as container environment variables. They are never stored in the database.">
                             <div class="text-muted">
                                 Credentials are read from environment variables only.

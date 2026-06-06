@@ -19,6 +19,7 @@
     "website": "https://wadprog.github.io/odoo-s3-file-upload/",
     "depends": ["project", "mail", "web"],
     "data": [
+        "data/ir_cron.xml",
         "views/res_config_settings_views.xml",
         "views/ir_attachment_views.xml",
     ],
@@ -42,6 +43,11 @@
             ),
             (
                 "after",
+                "mail/static/src/core/common/attachment_model.js",
+                "odoo_s3_file_upload/static/src/js/attachment_model_patch.js",
+            ),
+            (
+                "after",
                 "mail/static/src/core/common/attachment_upload_service.js",
                 "odoo_s3_file_upload/static/src/js/s3_multipart_upload.js",
             ),
@@ -56,6 +62,7 @@
                 "mail/static/src/core/common/attachment_list.js",
                 "odoo_s3_file_upload/static/src/js/attachment_list_patch.js",
             ),
+            "odoo_s3_file_upload/static/src/xml/attachment_list_patch.xml",
             (
                 "after",
                 "web/static/src/core/file_viewer/file_viewer.js",

@@ -1,10 +1,14 @@
+import logging
 import os
 import uuid
+from datetime import timedelta
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 from ..services.storage_client import DEFAULT_BLOCKLIST, get_storage_client
+
+_logger = logging.getLogger(__name__)
 
 S3_STATUS_PENDING = "pending"
 S3_STATUS_UPLOADED = "uploaded"
@@ -268,10 +272,43 @@ class IrAttachment(models.Model):
 
     def s3_finalize(self):
         self.ensure_one()
-        if self.s3_storage_status != S3_STATUS_PENDING:
+        if self.s3_storage_status not in (S3_STATUS_PENDING, S3_STATUS_FAILED):
             raise UserError(_("Only pending attachments can be finalized."))
         self.s3_mark_uploaded(etag=self.s3_etag)
         return True
+
+    @api.model
+    def s3_cleanup_stale_uploads(self):
+        """Abort and remove stale pending/failed task uploads (cron)."""
+        hours = int(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("odoo_s3_file_upload.stale_upload_hours", "24")
+        )
+        threshold = fields.Datetime.now() - timedelta(hours=hours)
+        stale = self.search(
+            [
+                ("res_model", "=", "project.task"),
+                ("s3_storage_status", "in", (S3_STATUS_PENDING, S3_STATUS_FAILED)),
+                ("write_date", "<", threshold),
+            ]
+        )
+        for attachment in stale:
+            try:
+                attachment.s3_cancel()
+            except UserError as exc:
+                _logger.warning(
+                    "Could not cancel stale S3 attachment %s: %s",
+                    attachment.id,
+                    exc,
+                )
+        return True
+
+    def _to_store_defaults(self, target):
+        defaults = super()._to_store_defaults(target)
+        if "s3_storage_status" not in defaults:
+            defaults = [*defaults, "s3_storage_status"]
+        return defaults
 
     def s3_abort_multipart(self):
         self.ensure_one()

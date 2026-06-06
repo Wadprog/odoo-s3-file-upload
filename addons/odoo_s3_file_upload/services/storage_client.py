@@ -5,6 +5,7 @@ import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
+from odoo import _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -31,11 +32,13 @@ class S3StorageClient:
 
     def _validate_config(self):
         if not self.bucket:
-            raise UserError("S3 bucket name is not configured. Set it in Settings.")
+            raise UserError(_("S3 bucket name is not configured. Set it in Settings."))
         if not os.environ.get("S3_ACCESS_KEY_ID") or not os.environ.get("S3_SECRET_ACCESS_KEY"):
             raise UserError(
-                "S3 credentials are missing. Set S3_ACCESS_KEY_ID and "
-                "S3_SECRET_ACCESS_KEY in the container environment."
+                _(
+                    "S3 credentials are missing. Set S3_ACCESS_KEY_ID and "
+                    "S3_SECRET_ACCESS_KEY in the container environment."
+                )
             )
 
     def _session_kwargs(self):
@@ -69,7 +72,7 @@ class S3StorageClient:
             self._client().head_bucket(Bucket=self.bucket)
         except ClientError as exc:
             _logger.error("S3 connection test failed for bucket %s: %s", self.bucket, exc)
-            raise UserError(f"Storage connection failed: {exc}") from exc
+            raise UserError(_("Storage connection failed: %s", exc)) from exc
 
     def init_multipart(self, key, content_type=None):
         params = {"Bucket": self.bucket, "Key": self.build_key(key)}
@@ -80,7 +83,7 @@ class S3StorageClient:
             return response["UploadId"]
         except ClientError as exc:
             _logger.error("S3 init_multipart failed for key %s: %s", key, exc)
-            raise UserError(f"Failed to start multipart upload: {exc}") from exc
+            raise UserError(_("Failed to start multipart upload: %s", exc)) from exc
 
     def presign_part(self, key, upload_id, part_number):
         try:
@@ -96,7 +99,7 @@ class S3StorageClient:
             )
         except ClientError as exc:
             _logger.error("S3 presign_part failed for key %s part %s: %s", key, part_number, exc)
-            raise UserError(f"Failed to presign upload part: {exc}") from exc
+            raise UserError(_("Failed to presign upload part: %s", exc)) from exc
 
     def complete_multipart(self, key, upload_id, parts):
         try:
@@ -108,7 +111,7 @@ class S3StorageClient:
             )
         except ClientError as exc:
             _logger.error("S3 complete_multipart failed for key %s: %s", key, exc)
-            raise UserError(f"Failed to complete multipart upload: {exc}") from exc
+            raise UserError(_("Failed to complete multipart upload: %s", exc)) from exc
 
     def abort_multipart(self, key, upload_id):
         try:
@@ -119,7 +122,7 @@ class S3StorageClient:
             )
         except ClientError as exc:
             _logger.error("S3 abort_multipart failed for key %s: %s", key, exc)
-            raise UserError(f"Failed to abort multipart upload: {exc}") from exc
+            raise UserError(_("Failed to abort multipart upload: %s", exc)) from exc
 
     def head_object(self, key):
         try:
@@ -128,7 +131,7 @@ class S3StorageClient:
             if exc.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
                 return None
             _logger.error("S3 head_object failed for key %s: %s", key, exc)
-            raise UserError(f"Failed to check object: {exc}") from exc
+            raise UserError(_("Failed to check object: %s", exc)) from exc
 
     def presign_get(self, key):
         try:
@@ -139,7 +142,7 @@ class S3StorageClient:
             )
         except ClientError as exc:
             _logger.error("S3 presign_get failed for key %s: %s", key, exc)
-            raise UserError(f"Failed to presign download URL: {exc}") from exc
+            raise UserError(_("Failed to presign download URL: %s", exc)) from exc
 
 
 def get_storage_client(env):
