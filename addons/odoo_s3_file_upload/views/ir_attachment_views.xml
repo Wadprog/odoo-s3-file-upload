@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_attachment_form_s3" model="ir.ui.view">
+        <field name="name">ir.attachment.form.s3</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="S3 Storage" invisible="res_model != 'project.task'">
+                    <field name="s3_storage_status" readonly="1"/>
+                    <field name="storage_provider" readonly="1"/>
+                    <field name="s3_bucket" readonly="1"/>
+                    <field name="s3_key" readonly="1"/>
+                    <field name="s3_file_size" readonly="1"/>
+                    <field name="s3_upload_id" readonly="1"/>
+                    <field name="s3_etag" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_attachment_tree_s3" model="ir.ui.view">
+        <field name="name">ir.attachment.tree.s3</field>
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="s3_storage_status" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
