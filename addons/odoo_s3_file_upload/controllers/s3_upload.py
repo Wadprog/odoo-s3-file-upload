@@ -10,11 +10,11 @@ _logger = logging.getLogger(__name__)
 
 
 class S3UploadController(http.Controller):
-    def _get_task_attachment(self, attachment_id):
+    def _get_task_attachment(self, attachment_id, access_mode="write"):
         attachment = request.env["ir.attachment"].browse(attachment_id).exists()
         if not attachment:
             raise UserError(_("Attachment not found."))
-        attachment.check_access("write")
+        attachment.check_access(access_mode)
         if attachment.res_model != "project.task":
             raise UserError(_("Attachment is not linked to a project task."))
         return attachment
@@ -80,3 +80,22 @@ class S3UploadController(http.Controller):
         attachment = self._get_task_attachment(attachment_id)
         attachment.s3_abort_multipart()
         return {"aborted": True}
+
+    @http.route("/odoo_s3_file_upload/get_download_url", type="jsonrpc", auth="user")
+    def get_download_url(self, attachment_id):
+        attachment = self._get_task_attachment(attachment_id, access_mode="read")
+        url = attachment.s3_get_download_url()
+        ttl = int(
+            request.env["ir.config_parameter"]
+            .sudo()
+            .get_param("odoo_s3_file_upload.presigned_ttl_seconds", "3600")
+        )
+        return {"download_url": url, "ttl_seconds": ttl}
+
+    @http.route("/odoo_s3_file_upload/download/<int:attachment_id>", type="http", auth="user")
+    def download_redirect(self, attachment_id):
+        attachment = request.env["ir.attachment"].browse(attachment_id).exists()
+        if not attachment:
+            raise UserError(_("Attachment not found."))
+        url = attachment.s3_get_download_url()
+        return request.redirect(url, code=302, local=False)
