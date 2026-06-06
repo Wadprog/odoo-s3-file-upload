@@ -1,0 +1,16 @@
+# Secrets — never commit
+odoo_pg_pass
+postgresql_password
+config/odoo.conf
+
+# Odoo runtime
+sessions/
+*.pyc
+__pycache__/
+
+# OS
+.DS_Store
+
+# Local DB dumps
+Dump*.sql
+*.sql
